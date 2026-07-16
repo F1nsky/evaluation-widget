@@ -1,52 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css"/>
-</head>
+    <meta name="description" content="An accessible, persistent article-rating widget built with vanilla JavaScript.">
+    <title>Article Feedback Widget</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <main class="wrapper">
+      <section class="rating-panel" aria-labelledby="feedback-title">
+        <p class="eyebrow">Your feedback matters</p>
+        <h1 id="feedback-title">How useful was this article?</h1>
+        <p class="description">Choose a rating from one to five. Your selection is saved in this browser.</p>
 
-<body>
-
-  <!-- rating panel-->
-
-  <div class="wrapper">
-    
-    <div class="rating-panel">
-      
-      <h3>Give Feedback</h3>
-      <p>How high would you rate this article?</p>
-
-      <div class="stars">
-        <a>⭐</a>
-        <a>⭐</a>
-        <a>⭐</a>
-        <a>⭐</a>
-        <a>⭐</a>
-      </div>
-    </div>
-
-    <!--Popup-->
-
-    <div class="modal-wrapper">
-      <div class="shadow close-button"></div>
-      <div class="modal">
-        <button class="close-button">&times;</button>
-        <div class="body">
-          <p>Do you have any thoughts you would like to share?</p>
-          <textarea class="textarea"></textarea>
+        <div class="stars" role="radiogroup" aria-label="Article rating">
+          <button class="star" type="button" role="radio" aria-checked="false" aria-label="1 out of 5" data-value="1">★</button>
+          <button class="star" type="button" role="radio" aria-checked="false" aria-label="2 out of 5" data-value="2">★</button>
+          <button class="star" type="button" role="radio" aria-checked="false" aria-label="3 out of 5" data-value="3">★</button>
+          <button class="star" type="button" role="radio" aria-checked="false" aria-label="4 out of 5" data-value="4">★</button>
+          <button class="star" type="button" role="radio" aria-checked="false" aria-label="5 out of 5" data-value="5">★</button>
         </div>
-        <div class="footer">
-          <button class="send-button">Send</button>
-          <button class="cancel-button">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <script type="text/javascript" src="main.js"></script>
-  
-</body>
+        <p class="status" aria-live="polite">No rating selected yet.</p>
+        <button class="reset-button" type="button" hidden>Reset rating</button>
+      </section>
+    </main>
+
+    <div class="modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+      <button class="backdrop close-button" type="button" aria-label="Close feedback dialog"></button>
+      <form class="modal">
+        <button class="icon-button close-button" type="button" aria-label="Close feedback dialog">×</button>
+        <h2 id="dialog-title">Tell us what could be better</h2>
+        <label for="feedback-message">Additional feedback <span>(optional)</span></label>
+        <textarea id="feedback-message" rows="5" placeholder="Share a thought or describe a problem..."></textarea>
+        <div class="actions">
+          <button class="send-button" type="submit">Send feedback</button>
+          <button class="cancel-button close-button" type="button">Not now</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
